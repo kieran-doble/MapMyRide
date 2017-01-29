@@ -6,6 +6,7 @@ $db = mysqli_connect('mysql.hostinger.co.uk', 'u418399516_rider', '[S2OX3qIpImJI
 
 if (mysqli_connect_errno()) {
      die(mysqli_connect_error());
+		 echo "error";
 }
 
 
