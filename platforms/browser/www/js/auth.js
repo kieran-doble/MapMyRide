@@ -17,13 +17,13 @@ $(document).ready(function(){
 				cache: false,
 				beforeSend: function(){ $("#login").html('Connecting...');},
 				success: function(data){
-					if(data=="success")
+					if(data === "success")
 					{
 						localStorage.login="true";
 						localStorage.email=email;
 						window.location.href = "index.html";
 					}
-					else if(data="failed")
+					else if(data === "failed")
 					{
 						alert("Login error");
 						$("#login").html('Login');
