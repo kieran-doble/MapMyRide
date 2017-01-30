@@ -38,8 +38,8 @@ if(isset($_POST['signup']))
 //Login
 if(isset($_POST['login']))
 {
-	$email=mysqli_real_escape_string($_POST['email']);
-	$password=mysqli_real_escape_string($_POST['password']);
+	$email=mysqli_real_escape_string($db, $_POST['email']);
+	$password=mysqli_real_escape_string($db, $_POST['password']);
 	$login=mysqli_query($db, "select * from 'phonegap_login' where 'email'='$email' and `password`='$password'");
 	if (mysqli_num_rows($login)) {
 	    echo "success";
