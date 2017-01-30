@@ -23,7 +23,7 @@ if(isset($_POST['signup']))
 	{
 		// account does not exist
 		$newAccount=mysqli_query($db, "INSERT INTO phonegap_login (`fullname`,'email',`password`)
-			values ('$fullname','$email', SHA2('$password'))");
+			values ('$fullname',`$email`, SHA2('$password'))");
 		if (mysqli_num_rows($newAccount))
 		{
 			echo "success";
@@ -41,11 +41,12 @@ if(isset($_POST['login']))
 	$email=mysqli_real_escape_string($db, $_POST['email']);
 	$password=mysqli_real_escape_string($db, $_POST['password']);
 	$login=mysqli_query($db, "select * from 'phonegap_login' where `email`='{$email}' and `password`='{$password}'");
-	if (mysqli_num_rows($login)) {
-	    echo "success";
-	} else {
-	    echo "failed";
-	}
+	echo $login;
+	// if (mysqli_num_rows($login)) {
+	//     echo "success";
+	// } else {
+	//     echo "failed";
+	// }
 }
 
 //Change Password
