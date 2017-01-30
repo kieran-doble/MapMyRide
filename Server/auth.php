@@ -24,7 +24,7 @@ if(isset($_POST['signup']))
 	{
 		// account does not exist
 		$newAccount=mysqli_query($db, "INSERT INTO phonegap_login (`fullname`, `email`, `password`)
-			values ('$fullname',`$email`, SHA2('$password'))");
+			values ('{$fullname}',`{$email}`, SHA2('{$password}'))");
 		if (mysqli_num_rows($newAccount))
 		{
 			echo "success";
