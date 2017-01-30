@@ -1,5 +1,5 @@
 <?php
-echo "hello";
+
 header("Access-Control-Allow-Origin: *");
 
 //Connect & Select Database
@@ -16,6 +16,7 @@ if(isset($_POST['signup']))
 	$fullname=mysqli_real_escape_string($_POST['fullname']);
 	$email=mysqli_real_escape_string($_POST['email']);
 	$password=mysqli_real_escape_string($_POST['password']);
+	echo "success";
 	$login = mysqli_query($db, "SELECT * FROM phonegap_login WHERE email = '$email'");
 	if (mysqli_num_rows($login))
 	{
@@ -25,7 +26,7 @@ if(isset($_POST['signup']))
 		// account does not exist
 		$newAccount=mysqli_query($db, "INSERT INTO phonegap_login (`fullname`, `email`, `password`)
 			values ('$fullname',`$email`, SHA2('$password'))");
-			echo "success";
+
 		if (mysqli_num_rows($newAccount))
 		{
 			echo "success";
