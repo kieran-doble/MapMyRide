@@ -22,7 +22,7 @@ if(isset($_POST['signup']))
 	} else
 	{
 		// account does not exist
-		$newAccount=mysqli_query($db, "INSERT INTO phonegap_login (`fullname`,`email`,`password`)
+		$newAccount=mysqli_query($db, "INSERT INTO phonegap_login (`fullname`,'email',`password`)
 			values ('$fullname','$email', SHA2('$password'))");
 		if (mysqli_num_rows($newAccount))
 		{
@@ -40,7 +40,7 @@ if(isset($_POST['login']))
 {
 	$email=mysqli_real_escape_string($_POST['email']);
 	$password=mysqli_real_escape_string($_POST['password']);
-	$login=mysqli_query($db, "select * from `phonegap_login` where `email`='$email' and `password`='$password'");
+	$login=mysqli_query($db, "select * from 'phonegap_login' where 'email'='$email' and `password`='$password'");
 	if (mysqli_num_rows($login)) {
 	    echo "success";
 	} else {
@@ -54,10 +54,10 @@ if(isset($_POST['change_password']))
 	$email=$_POST['email'];
 	$old_password=mysqli_real_escape_string($_POST['old_password']);
 	$new_password=mysqli_real_escape_string($_POST['new_password']);
-	$check=mysqli_query($db, "select * from `phonegap_login` where `email`='$email' and `password`='$old_password'");
+	$check=mysqli_query($db, "select * from 'phonegap_login' where 'email'='$email' and `password`='$old_password'");
 	if(mysqli_num_rows($check))
 	{
-		mysqli_query($db, "update `phonegap_login` set `password`='$new_password' where `email`='$email'");
+		mysqli_query($db, "update 'phonegap_login' set `password`='$new_password' where 'email'='$email'");
 		echo "success";
 	}
 	else
@@ -70,12 +70,11 @@ if(isset($_POST['change_password']))
 if(isset($_POST['forget_password']))
 {
 	$email=$_POST['email'];
-	$q=mysqli_query($db, "select * from `phonegap_login` where `email`='$email'");
-	$check=mysqli_num_rows($q);
-	if(mysqli_num_rows($check))
+	$q=mysqli_query($db, "select * from 'phonegap_login' where 'email'='$email'");
+	if(mysqli_num_rows($q))
 	{
 		echo "success";
-		$data=mysql_fetch_array($q);
+		$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
 		$string="Hey,".$data['fullname'].", Your password is".$data['password'];
 		mail($email, "Your Password", $string);
 	}
