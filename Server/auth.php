@@ -32,7 +32,6 @@ if(isset($_POST['signup']))
 			echo "failed";
 		}
 	}
-	echo mysql_error();
 }
 
 //Login
@@ -57,7 +56,7 @@ if(isset($_POST['change_password']))
 	$check=mysqli_query($db, "select * from `phonegap_login` where `email`='$email' and `password`='$old_password'");
 	if(mysqli_num_rows($check))
 	{
-		mysqli_query($db "update `phonegap_login` set `password`='$new_password' where `email`='$email'");
+		mysqli_query($db, "update `phonegap_login` set `password`='$new_password' where `email`='$email'");
 		echo "success";
 	}
 	else
