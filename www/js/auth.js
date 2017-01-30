@@ -42,7 +42,7 @@ $(document).ready(function(){
     	var dataString="fullname="+fullname+"&email="+email+"&password="+password+"&signup=";
 			console.log($.trim(fullname));
 			console.log($.trim(email));
-			console.log($.trim (password));
+			console.log($.trim (password).length);
     // 	if($.trim(fullname).length>0 && $.trim(email).length>0 && $.trim(password).length>0)
 		// {
 		// 	$.ajax({
