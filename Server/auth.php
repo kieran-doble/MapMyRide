@@ -19,7 +19,7 @@ if(isset($_POST['signup']))
 	$login = mysqli_query($db, "select * from phonegap_login where `email` = '{$email}'");
 	if (mysqli_num_rows($login))
 	{
-		echo "Account exists";
+		echo "exist";
 	} else
 	{
 		// account does not exist
