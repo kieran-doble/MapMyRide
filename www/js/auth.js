@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	var url="http://up693500.esy.es/MMR/Server/auth.php?callback=?";
+	var url="http://up693500.esy.es/Server/auth.php?callback=?";
 
     //Login Function
     $("#login").click(function(){
