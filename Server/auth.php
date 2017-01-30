@@ -1,4 +1,5 @@
 <?php
+echo "hello";
 header("Access-Control-Allow-Origin: *");
 
 //Connect & Select Database
