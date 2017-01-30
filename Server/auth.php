@@ -13,10 +13,9 @@ if (mysqli_connect_errno()) {
 //Create New Account
 if(isset($_POST['signup']))
 {
-	$fullname=mysqli_real_escape_string($_POST['fullname']);
-	$email=mysqli_real_escape_string($_POST['email']);
-	$password=mysqli_real_escape_string($_POST['password']);
-	echo "success";
+	$fullname=mysqli_real_escape_string($db, $_POST['fullname']);
+	$email=mysqli_real_escape_string($db, $_POST['email']);
+	$password=mysqli_real_escape_string($db, $_POST['password']);
 	$login = mysqli_query($db, "SELECT * FROM phonegap_login WHERE email = '$email'");
 	if (mysqli_num_rows($login))
 	{
@@ -26,7 +25,6 @@ if(isset($_POST['signup']))
 		// account does not exist
 		$newAccount=mysqli_query($db, "INSERT INTO phonegap_login (`fullname`, `email`, `password`)
 			values ('$fullname',`$email`, SHA2('$password'))");
-
 		if (mysqli_num_rows($newAccount))
 		{
 			echo "success";
