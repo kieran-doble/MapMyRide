@@ -26,7 +26,7 @@ if(isset($_POST['signup']))
 		$q=mysqli_query($db, "insert into phonegap_login (fullname, email, password)
 			values ('{$fullname}', '{$email}', '{$password}')");
 
-		if (mysqli_num_rows($q))
+		if ($q)
 		{
 			echo "success";
 		}
