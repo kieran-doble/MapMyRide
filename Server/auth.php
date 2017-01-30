@@ -16,9 +16,10 @@ if(isset($_POST['signup']))
 	$email=mysql_real_escape_string($_POST['email']);
 	$password=mysql_real_escape_string($_POST['password']);
 	$login = mysqli_query($db, "SELECT * FROM phonegap_login WHERE email = '$email'");
-	if (mysqli_num_rows($login)) {
+	if (mysqli_num_rows($login))
+	{
 		echo "Account exists";
-} else {
+	} else
 	{
 		// account does not exist
 		$newAccount=mysqli_query($db, "INSERT INTO phonegap_login (fullname`,`email`,`password`)

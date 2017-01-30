@@ -51,15 +51,15 @@ $(document).ready(function(){
 				cache: false,
 				beforeSend: function(){ $("#signup").val('Connecting...');},
 				success: function(data){
-					if(data=="success")
+					if(data === "success")
 					{
 						alert("Thank you for Registering with us! you can login now");
 					}
-					else if(data="exist")
+					else if(data === "exist")
 					{
 						alert("Hey! You alreay has account! you can login with us");
 					}
-					else if(data="failed")
+					else if(data === "failed")
 					{
 						alert("Something Went wrong");
 					}
@@ -85,15 +85,15 @@ $(document).ready(function(){
 				cache: false,
 				beforeSend: function(){ $("#change_password").val('Connecting...');},
 				success: function(data){
-					if(data=="incorrect")
+					if(data === "incorrect")
 					{
 						alert("Your old password is incorrect");
 					}
-					else if(data="success")
+					else if(data === "success")
 					{
 						alert("Password Changed successfully");
 					}
-					else if(data="failed")
+					else if(data === "failed")
 					{
 						alert("Something Went wrong");
 					}
@@ -117,11 +117,11 @@ $(document).ready(function(){
 				cache: false,
 				beforeSend: function(){ $("#forget_password").val('Connecting...');},
 				success: function(data){
-					if(data=="invalid")
+					if(data === "invalid")
 					{
 						alert("Your have not registered with us");
 					}
-					else if(data="success")
+					else if(data === "success")
 					{
 						alert("we have sent password to your email address, please check");
 					}
