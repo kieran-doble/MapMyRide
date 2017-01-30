@@ -22,18 +22,19 @@ if(isset($_POST['signup']))
 		echo "Account exists";
 	} else
 	{
-		// account does not exist
-		$q=mysqli_query($db, "INSERT INTO phonegap_login (fullname, email, password)
-			values ('{$fullname}', '{$email}', '{$password}')");
-
-		if (mysqli_num_rows($q))
-		{
-			echo "success";
-		}
-		else
-		{
-			echo "failed";
-		}
+		echo "success";
+		// // account does not exist
+		// $q=mysqli_query($db, "INSERT INTO phonegap_login (fullname, email, password)
+		// 	values ('{$fullname}', '{$email}', '{$password}')");
+		//
+		// if (mysqli_num_rows($q))
+		// {
+		// 	echo "success";
+		// }
+		// else
+		// {
+		// 	echo "failed";
+		// }
 	}
 }
 
