@@ -74,7 +74,7 @@ if(isset($_POST['forget_password']))
 	if(mysqli_num_rows($q))
 	{
 		echo "success";
-		$data = mysqli_fetch_array($result,MYSQLI_ASSOC);
+		$data = mysqli_fetch_array($q,MYSQLI_ASSOC);
 		$string="Hey,".$data['fullname'].", Your password is".$data['password'];
 		mail($email, "Your Password", $string);
 	}
