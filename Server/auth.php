@@ -12,9 +12,9 @@ if (mysqli_connect_errno()) {
 //Create New Account
 if(isset($_POST['signup']))
 {
-	$fullname=mysql_real_escape_string($_POST['fullname']);
-	$email=mysql_real_escape_string($_POST['email']);
-	$password=mysql_real_escape_string($_POST['password']);
+	$fullname=mysqli_real_escape_string($_POST['fullname']);
+	$email=mysqli_real_escape_string($_POST['email']);
+	$password=mysqli_real_escape_string($_POST['password']);
 	$login = mysqli_query($db, "SELECT * FROM phonegap_login WHERE email = '$email'");
 	if (mysqli_num_rows($login))
 	{
@@ -38,8 +38,8 @@ if(isset($_POST['signup']))
 //Login
 if(isset($_POST['login']))
 {
-	$email=mysql_real_escape_string($_POST['email']);
-	$password=mysql_real_escape_string($_POST['password']);
+	$email=mysqli_real_escape_string($_POST['email']);
+	$password=mysqli_real_escape_string($_POST['password']);
 	$login=mysqli_query($db, "select * from `phonegap_login` where `email`='$email' and `password`='$password'");
 	if (mysqli_num_rows($login)) {
 	    echo "success";
@@ -52,8 +52,8 @@ if(isset($_POST['login']))
 if(isset($_POST['change_password']))
 {
 	$email=$_POST['email'];
-	$old_password=mysql_real_escape_string($_POST['old_password']);
-	$new_password=mysql_real_escape_string($_POST['new_password']);
+	$old_password=mysqli_real_escape_string($_POST['old_password']);
+	$new_password=mysqli_real_escape_string($_POST['new_password']);
 	$check=mysqli_query($db, "select * from `phonegap_login` where `email`='$email' and `password`='$old_password'");
 	if(mysqli_num_rows($check))
 	{
