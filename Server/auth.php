@@ -59,8 +59,8 @@ if (isset($_POST['change_password'])) {
 
 // Forget Password
 if (isset($_POST['forget_password'])) {
-    $email=$_POST['email'];
-    $q=mysqli_query($db, "select * from 'phonegap_login' where 'email'='$email'");
+    $email=mysqli_real_escape_string($db, $_POST['email']);
+    $q=mysqli_query($db, "select * from phonegap_login where `email`='{$email}'");
     if (mysqli_num_rows($q)) {
         echo "success";
         $data = mysqli_fetch_array($q, MYSQLI_ASSOC);
