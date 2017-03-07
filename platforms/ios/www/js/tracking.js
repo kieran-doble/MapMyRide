@@ -184,3 +184,4 @@ var trackPath = new google.maps.Polyline({
 
 // Apply the line to the map
 trackPath.setMap(map);
+}
