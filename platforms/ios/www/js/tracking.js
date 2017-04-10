@@ -1,37 +1,24 @@
-document.addEventListener("deviceready", function() {
-
-    if (navigator.network.connection.type == Connection.NONE) {
-        $("#home_network_button").text('No Internet Access')
-            .attr("data-icon", "delete")
-            .button('refresh');
-    }
-
-});
-
-var track_id = ''; // Name/ID of the exercise
-var watch_id = null; // ID of the geolocation
+var track_id = '';      // Name/ID of the exercise
+var watch_id = null;    // ID of the geolocation
 var tracking_data = []; // Array containing GPS position objects
 
-$("#startTracking_start").live('click', function() {
+$("#startTracking_start").live('click', function(){
 
     // Start tracking the User
     watch_id = navigator.geolocation.watchPosition(
 
         // Success
-        function(position) {
+        function(position){
             tracking_data.push(position);
         },
 
         // Error
-        function(error) {
+        function(error){
             console.log(error);
         },
 
         // Settings
-        {
-            frequency: 3000,
-            enableHighAccuracy: true
-        });
+        { frequency: 3000, enableHighAccuracy: true });
 
     // Tidy up the UI
     track_id = $("#track_id").val();
@@ -41,31 +28,31 @@ $("#startTracking_start").live('click', function() {
     $("#startTracking_status").html("Tracking workout: <strong>" + track_id + "</strong>");
 });
 
-$("#startTracking_stop").live('click', function() {
+$("#startTracking_stop").live('click', function(){
 
-    // Stop tracking the user
-    navigator.geolocation.clearWatch(watch_id);
+  // Stop tracking the user
+  navigator.geolocation.clearWatch(watch_id);
 
-    // Save the tracking data
-    window.localStorage.setItem(track_id, JSON.stringify(tracking_data));
+  // Save the tracking data
+  window.localStorage.setItem(track_id, JSON.stringify(tracking_data));
 
-    // Reset watch_id and tracking_data
-    var watch_id = null;
-    var tracking_data = null;
+  // Reset watch_id and tracking_data
+  var watch_id = null;
+  var tracking_data = null;
 
-    // Tidy up the UI
-    $("#track_id").val("").show();
+  // Tidy up the UI
+  $("#track_id").val("").show();
 
-    $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
+  $("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
 
 });
 
-$("#home_clearstorage_button").live('click', function() {
+$("#home_clearstorage_button").live('click', function(){
     window.localStorage.clear();
 });
 
-$("#home_seedgps_button").live('click', function() {
-    window.localStorage.setItem('Sample block', '[{"timestamp":1335700802000,"coords":{"heading":null,"altitude":null,"longitude":170.33488333333335,"accuracy":0,"latitude":-45.87475166666666,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700803000,"coords":{"heading":null,"altitude":null,"longitude":170.33481666666665,"accuracy":0,"latitude":-45.87465,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700804000,"coords":{"heading":null,"altitude":null,"longitude":170.33426999999998,"accuracy":0,"latitude":-45.873708333333326,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700805000,"coords":{"heading":null,"altitude":null,"longitude":170.33318333333335,"accuracy":0,"latitude":-45.87178333333333,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700806000,"coords":{"heading":null,"altitude":null,"longitude":170.33416166666666,"accuracy":0,"latitude":-45.871478333333336,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700807000,"coords":{"heading":null,"altitude":null,"longitude":170.33526833333332,"accuracy":0,"latitude":-45.873394999999995,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700808000,"coords":{"heading":null,"altitude":null,"longitude":170.33427333333336,"accuracy":0,"latitude":-45.873711666666665,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700809000,"coords":{"heading":null,"altitude":null,"longitude":170.33488333333335,"accuracy":0,"latitude":-45.87475166666666,"speed":null,"altitudeAccuracy":null}}]');
+$("#home_seedgps_button").live('click', function(){
+    window.localStorage.setItem('Sample block','[{"timestamp":1335700800000,"coords":{"heading":null,"altitude":null,"longitude":-1.806859,"accuracy":0,"latitude":50.731435,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335800805000,"coords":{"heading":null,"altitude":null,"longitude":-1.808243,"accuracy":0,"latitude":50.732209,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700808000,"coords":{"heading":null,"altitude":null,"longitude":-1.809574,"accuracy":0,"latitude":50.731157,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335900810000,"coords":{"heading":null,"altitude":null,"longitude":-1.807535,"accuracy":0,"latitude":50.730043,"speed":null,"altitudeAccuracy":null}},{"timestamp":1336000812000,"coords":{"heading":null,"altitude":null,"longitude":-1.806194,"accuracy":0,"latitude":50.731062,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700815000,"coords":{"heading":null,"altitude":null,"longitude":-1.806859,"accuracy":0,"latitude":50.731435,"speed":null,"altitudeAccuracy":null}}]');
 
 });
 
@@ -81,6 +68,7 @@ $('#history').live('pageshow', function () {
 
   // Iterate over all of the recorded tracks, populating the list
   for(i=0; i<tracks_recorded; i++){
+
     $("#history_tracklist").append("<li><a href='#track_info' data-ajax='false'>" + window.localStorage.key(i) + "</a></li>");
   }
 
@@ -110,7 +98,7 @@ $('#track_info').live('pageshow', function(){
   // Turn the stringified GPS data back into a JS object
   data = JSON.parse(data);
 
-  function gps_distance(lat1, lon1, lat2, lon2)
+function gps_distance(lat1, lon1, lat2, lon2)
 {
   // http://www.movable-type.co.uk/scripts/latlong.html
     var R = 6371; // km
@@ -184,4 +172,4 @@ var trackPath = new google.maps.Polyline({
 
 // Apply the line to the map
 trackPath.setMap(map);
-}
+});
