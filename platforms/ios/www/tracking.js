@@ -1,122 +1,129 @@
-console.log("im here");
 var route_id = '';      // Name/ID of the route
 var watch_id = null;    // ID of the geolocation
 var tracking_data = []; // Array containing GPS position objects
 
 $("#startTracking_start").live('click', function(){
-                               
-                               // Start tracking the User
-                               watch_id = navigator.geolocation.watchPosition(
-                                                                              
-                                                                              // Success
-                                                                              function(position){
-                                                                              tracking_data.push(position);
-                                                                              },
-                                                                              
-                                                                              // Error
-                                                                              function(error){
-                                                                              console.log(error);
-                                                                              },
-                                                                              
-                                                                              // Settings
-                                                                              { frequency: 3000, enableHighAccuracy: true });
-                               
-                               // Tidy up the UI
-                               route_id = $("#route_id").val();
-                               
-                               $("#route_id").hide();
-                               
-                               $("#startTracking_status").html("Tracking route: <strong>" + route_id + "</strong>");
-                               });
+
+    // Start tracking the User
+    watch_id = navigator.geolocation.watchPosition(
+
+        // Success
+        function(position){
+            tracking_data.push(position);
+        },
+
+        // Error
+        function(error){
+            console.log(error);
+        },
+
+        // Settings
+        { frequency: 3000, enableHighAccuracy: true });
+
+    // Tidy up the UI
+    route_id = $("#route_id").val();
+
+    $("#route_id").hide();
+
+    $("#startTracking_status").html("Tracking route: <strong>" + route_id + "</strong>");
+});
+
+function cloneAsObject(obj) {
+    if (obj === null || !(obj instanceof Object)) {
+        return obj;
+    }
+    var temp = (obj instanceof Array) ? [] : {};
+    // ReSharper disable once MissingHasOwnPropertyInForeach
+    for (var key in obj) {
+        temp[key] = cloneAsObject(obj[key]);
+    }
+    return temp;
+}
 
 $("#startTracking_stop").live('click', function(){
-                              
-                              // Stop tracking the user
-                              navigator.geolocation.clearWatch(watch_id);
-                              
-                              // Save the tracking data
-                              window.localStorage.setItem(route_id, JSON.stringify(tracking_data));
-                              
-                              // Reset watch_id and tracking_data
-                              var watch_id = null;
-                              var tracking_data = null;
-                              
-                              // Tidy up the UI
-                              $("#route_id").val("").show();
-                              
-                              $("#startTracking_status").html("Stopped tracking route: <strong>" + route_id + "</strong>");
-                              
-                              });
+
+  // Stop tracking the user
+  navigator.geolocation.clearWatch(watch_id);
+
+  // Save the tracking data
+  window.localStorage.setItem(route_id, JSON.stringify(cloneAsObject(tracking_data)));
+
+  // Reset watch_id and tracking_data
+  var watch_id = null;
+  //var tracking_data = null;
+
+  // Tidy up the UI
+  $("#route_id").val("").show();
+
+  $("#startTracking_status").html("Stopped tracking route: <strong>" + route_id + "</strong>");
+
+});
 
 $("#home_clearstorage_button").live('click', function(){
-                                    window.localStorage.clear();
-                                    });
+    window.localStorage.clear();
+});
 
 $("#home_seedgps_button").live('click', function(){
-                               window.localStorage.setItem('Sample block','[{"timestamp":1335700800000,"coords":{"heading":null,"altitude":null,"longitude":-1.806859,"accuracy":0,"latitude":50.731435,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335800805000,"coords":{"heading":null,"altitude":null,"longitude":-1.808243,"accuracy":0,"latitude":50.732209,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700808000,"coords":{"heading":null,"altitude":null,"longitude":-1.809574,"accuracy":0,"latitude":50.731157,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335900810000,"coords":{"heading":null,"altitude":null,"longitude":-1.807535,"accuracy":0,"latitude":50.730043,"speed":null,"altitudeAccuracy":null}},{"timestamp":1336000812000,"coords":{"heading":null,"altitude":null,"longitude":-1.806194,"accuracy":0,"latitude":50.731062,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700815000,"coords":{"heading":null,"altitude":null,"longitude":-1.806859,"accuracy":0,"latitude":50.731435,"speed":null,"altitudeAccuracy":null}}]');
-                               
-                               });
+    window.localStorage.setItem('Sample block','[{"timestamp":1335700800000,"coords":{"heading":null,"altitude":null,"longitude":-1.806859,"accuracy":0,"latitude":50.731435,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335800805000,"coords":{"heading":null,"altitude":null,"longitude":-1.808243,"accuracy":0,"latitude":50.732209,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700808000,"coords":{"heading":null,"altitude":null,"longitude":-1.809574,"accuracy":0,"latitude":50.731157,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335900810000,"coords":{"heading":null,"altitude":null,"longitude":-1.807535,"accuracy":0,"latitude":50.730043,"speed":null,"altitudeAccuracy":null}},{"timestamp":1336000812000,"coords":{"heading":null,"altitude":null,"longitude":-1.806194,"accuracy":0,"latitude":50.731062,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700815000,"coords":{"heading":null,"altitude":null,"longitude":-1.806859,"accuracy":0,"latitude":50.731435,"speed":null,"altitudeAccuracy":null}}]');
+
+});
 
 // When the user views the history page
 $('#history').live('pageshow', function () {
-                   
-                   // Count the number of entries in localStorage and display this information to the user
-                   tracks_recorded = window.localStorage.length;
-                   $("#tracks_recorded").html("<strong>" + tracks_recorded + "</strong> Route(s) recorded");
-                   
-                   // Empty the list of recorded tracks
-                   $("#history_tracklist").empty();
-                   
-                   // Iterate over all of the recorded tracks, populating the list
-                   for(i=0; i<tracks_recorded; i++){
-                   
-                   $("#history_tracklist").append("<li><a href='#track_info' data-ajax='false'>" + window.localStorage.key(i) + "</a></li>");
-                   }
-                   
-                   // Tell jQueryMobile to refresh the list
-                   $("#history_tracklist").listview('refresh');
-                   
-                   });
+
+  // Count the number of entries in localStorage and display this information to the user
+  tracks_recorded = window.localStorage.length;
+  $("#tracks_recorded").html("<strong>" + tracks_recorded + "</strong> Route(s) recorded");
+
+  // Empty the list of recorded tracks
+  $("#history_tracklist").empty();
+
+  // Iterate over all of the recorded tracks, populating the list
+  for(i=0; i<tracks_recorded; i++){
+
+    $("#history_tracklist").append("<li><a href='#track_info' data-ajax='false'>" + window.localStorage.key(i) + "</a></li>");
+  }
+
+  // Tell jQueryMobile to refresh the list
+  $("#history_tracklist").listview('refresh');
+
+});
 
 $("#history_tracklist li a").live('click', function(){
-                                  
-                                  $("#track_info").attr("route_id", $(this).text());
-                                  
-                                  });
+
+  $("#track_info").attr("route_id", $(this).text());
+
+});
 
 // When the user views the Track Info page
 $('#track_info').live('pageshow', function(){
-                      
-                      
-                      // Find the route_id of the route they are viewing
-                      var key = $(this).attr("route_id");
-                      
-                      // Update the Track Info page header to the route_id
-                      $("#track_info div[data-role=header] h1").text(key);
-                      
-                      // Get all the GPS data for the specific route
-                      var data = window.localStorage.getItem(key);
-                      console.log("test");
-                      
-                      // Turn the stringified GPS data back into a JS object
-                      data = JSON.parse(data);
-                      console.log(data);
-                      });
+
+  // Find the route_id of the route they are viewing
+  var key = $(this).attr("route_id");
+
+  // Update the Track Info page header to the route_id
+  $("#track_info div[data-role=header] h1").text(key);
+
+  // Get all the GPS data for the specific route
+  var data = window.localStorage.getItem(key);
+
+  // Turn the stringified GPS data back into a JS object
+  data = JSON.parse(data);
 
 function gps_distance(lat1, lon1, lat2, lon2)
 {
-    // http://www.movable-type.co.uk/scripts/latlong.html
+  // http://www.movable-type.co.uk/scripts/latlong.html
     var R = 6371; // km
     var dLat = (lat2-lat1) * (Math.PI / 180);
     var dLon = (lon2-lon1) * (Math.PI / 180);
     var lat1 = lat1 * (Math.PI / 180);
     var lat2 = lat2 * (Math.PI / 180);
-    
+
     var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+            Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
     var d = R * c;
-    
+
     return d;
 }
 
@@ -124,11 +131,11 @@ function gps_distance(lat1, lon1, lat2, lon2)
 total_km = 0;
 
 for(i = 0; i < data.length; i++){
-    
+
     if(i == (data.length - 1)){
         break;
     }
-    
+
     total_km += gps_distance(data[i].coords.latitude, data[i].coords.longitude, data[i+1].coords.latitude, data[i+1].coords.longitude);
 }
 
@@ -152,9 +159,9 @@ var myLatLng = new google.maps.LatLng(data[0].coords.latitude, data[0].coords.lo
 
 // Google Map options
 var myOptions = {
-zoom: 15,
-center: myLatLng,
-mapTypeId: google.maps.MapTypeId.ROADMAP
+  zoom: 15,
+  center: myLatLng,
+  mapTypeId: google.maps.MapTypeId.ROADMAP
 };
 
 // Create the Google Map, set options
@@ -169,11 +176,12 @@ for(i=0; i<data.length; i++){
 
 // Plot the GPS entries as a line on the Google Map
 var trackPath = new google.maps.Polyline({
-                                         path: trackCoords,
-                                         strokeColor: "#FF0000",
-                                         strokeOpacity: 1.0,
-                                         strokeWeight: 2
-                                         });
+  path: trackCoords,
+  strokeColor: "#FF0000",
+  strokeOpacity: 1.0,
+  strokeWeight: 2
+});
 
 // Apply the line to the map
 trackPath.setMap(map);
+});

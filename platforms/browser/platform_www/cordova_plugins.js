@@ -619,7 +619,7 @@ module.exports.metadata =
     "cordova-plugin-device-orientation": "1.0.6",
     "cordova-plugin-dialogs": "1.2.1",
     "cordova-plugin-file-transfer": "1.5.1",
-    "cordova-plugin-geolocation": "2.4.2",
+    "cordova-plugin-geolocation": "2.1.0",
     "cordova-plugin-globalization": "1.0.6",
     "cordova-plugin-inappbrowser": "1.3.0",
     "cordova-plugin-media": "2.2.0",

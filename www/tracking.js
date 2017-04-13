@@ -1,4 +1,3 @@
-console.log("im here");
 var route_id = '';      // Name/ID of the route
 var watch_id = null;    // ID of the geolocation
 var tracking_data = []; // Array containing GPS position objects
@@ -29,17 +28,29 @@ $("#startTracking_start").live('click', function(){
     $("#startTracking_status").html("Tracking route: <strong>" + route_id + "</strong>");
 });
 
+function cloneAsObject(obj) {
+    if (obj === null || !(obj instanceof Object)) {
+        return obj;
+    }
+    var temp = (obj instanceof Array) ? [] : {};
+    // ReSharper disable once MissingHasOwnPropertyInForeach
+    for (var key in obj) {
+        temp[key] = cloneAsObject(obj[key]);
+    }
+    return temp;
+}
+
 $("#startTracking_stop").live('click', function(){
 
   // Stop tracking the user
   navigator.geolocation.clearWatch(watch_id);
 
   // Save the tracking data
-  window.localStorage.setItem(route_id, JSON.stringify(tracking_data));
+  window.localStorage.setItem(route_id, JSON.stringify(cloneAsObject(tracking_data)));
 
   // Reset watch_id and tracking_data
   var watch_id = null;
-  var tracking_data = null;
+  //var tracking_data = null;
 
   // Tidy up the UI
   $("#route_id").val("").show();
@@ -95,11 +106,9 @@ $('#track_info').live('pageshow', function(){
 
   // Get all the GPS data for the specific route
   var data = window.localStorage.getItem(key);
-                      console.log("test");
 
   // Turn the stringified GPS data back into a JS object
   data = JSON.parse(data);
-});
 
 function gps_distance(lat1, lon1, lat2, lon2)
 {
@@ -175,3 +184,4 @@ var trackPath = new google.maps.Polyline({
 
 // Apply the line to the map
 trackPath.setMap(map);
+});

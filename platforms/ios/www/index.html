@@ -5,32 +5,31 @@
     <title>Map My Ride</title>
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src 'self' 'unsafe-inline' *; img-src * data:'unsafe-inline'"> -->
     <!-- <script type="text/javascript" src="cordova-1.7.0.js"></script> -->
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBeW2JJ8EnqyOrBEKpNmxavvx0hoTZrrE4"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBeW2JJ8EnqyOrBEKpNmxavvx0hoTZrrE4"></script>
     <script type="text/javascript" src="json2.js"></script>
     <script type="text/javascript" src="jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="jquery.mobile-1.1.0.min.js"></script>
     <script type="text/javascript" src="tracking.js"></script>
     <link rel="stylesheet" href="master.css" />
     <link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
+
     <script type="text/javascript">
-        document.addEventListener("deviceready", onDeviceReady, false);
-        function onDeviceReady() {
-            console.log(StatusBar);
-        }
+    document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+  console.log(StatusBar);
+}
     </script>
     <script type="text/javascript">
         document.addEventListener("deviceready", function() {
-                                  
-                                  if (navigator.network.connection.type == Connection.NONE) {
-                                  $("#home_network_button").text('No Internet Access')
-                                  .attr("data-icon", "delete")
-                                  .button('refresh');
-                                  }
-                                  
-                                  });
-        </script>
 
+            if (navigator.network.connection.type == Connection.NONE) {
+                $("#home_network_button").text('No Internet Access')
+                    .attr("data-icon", "delete")
+                    .button('refresh');
+            }
 
+        });
+    </script>
 </head>
 <body>
     <div data-role="page" id="home">
