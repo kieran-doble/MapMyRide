@@ -1,69 +1,26 @@
-# Hello World PhoneGap Template [![bitHound Score][bithound-img]][bithound-url]
-
-A PhoneGap Hello World template
-
-## Usage
-
-#### PhoneGap CLI
-
-The hello-world template is the default when you create a new application using the [phonegap-cli][phonegap-cli-url].
-
-    phonegap create my-app
-
-Create an app using this template specifically:
-
-    phonegap create my-app --template hello-world
-
-To see a list of other available PhoneGap templates:
-
-    phonegap template list
-
-## [config.xml][config-xml]
-
-#### android-minSdkVersion (Android only)
-
-Minimum SDK version supported on the target device. Maximum version is blank by default.
-
-This template sets the minimum to `14`.
-
-    <preference name="android-minSdkVersion" value="14" />
-
-#### &lt;access ...&gt; (All)
-
-This template defaults to wide open access.
-
-    <access origin="*" />
-
-It is strongly encouraged that you restrict access to external resources in your application before releasing to production.
-
-For more information on whitelist configuration, see the [Cordova Whitelist Guide][cordova-whitelist-guide] and the [Cordova Whitelist Plugin documentation][cordova-plugin-whitelist]
-
-## [www/index.html][index-html]
-
-#### Content Security Policy (CSP)
-
-The default CSP is similarly open:
-
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
-
-Much like the access tag above, you are strongly encouraged to use a more restrictive CSP in production.
-
-A good starting point declaration might be:
-
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" />
-
-For more information on the Content Security Policy, see the [section on CSP in the Cordova Whitelist Plugin documentation][cordova-plugin-whitelist-csp].
-
-Another good resource for generating a good CSP declaration is [CSP is Awesome][csp-is-awesome]
+Requirements
+The artefact has been thoroughly tested on iOS version 10.3.1 and Android version 6.0.1. Therefore, it is recommended that you use either of these version to use the application.
 
 
-[phonegap-cli-url]: http://github.com/phonegap/phonegap-cli
-[cordova-app]: http://github.com/apache/cordova-app-hello-world
-[bithound-img]: https://www.bithound.io/github/phonegap/phonegap-app-hello-world/badges/score.svg
-[bithound-url]: https://www.bithound.io/github/phonegap/phonegap-app-hello-world
-[config-xml]: https://github.com/phonegap/phonegap-template-hello-world/blob/master/config.xml
-[index-html]: https://github.com/phonegap/phonegap-template-hello-world/blob/master/www/index.html
-[cordova-whitelist-guide]: https://cordova.apache.org/docs/en/dev/guide/appdev/whitelist/index.html
-[cordova-plugin-whitelist]: http://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist
-[cordova-plugin-whitelist-csp]: http://cordova.apache.org/docs/en/latest/reference/cordova-plugin-whitelist#content-security-policy
-[csp-is-awesome]: http://cspisawesome.com
+Install PhoneGap
+To run the artefact on a mobile device install the PhoneGap desktop app from here: http://phonegap.com/getstarted/  Then, install the PhoneGap Developer application on a mobile device from Step 2 of the previous link.
+
+
+Add the artefact to PhoneGap
+To add the artefact simply drag the MapMyRide Directory from the Google Drive folder to the desired destination on your machine. Then add an existing project to the PhoneGap desktop app as illustrated below.
+
+
+Connect Android or iOS device to PhoneGap
+Once you have added the PhoneGap project to the desktop app, you will need to connect the PhoneGap Developer app.
+
+
+F.3 Using Map My Ride
+Using the artefact is fairly simple, it does however still contain the debugging buttons for “clear local storage” and “load test data” These have been left for the purpose of viewing data as it should display when the data is accurately stored.
+
+
+Tracking a ride
+To track a ride simply open the app and press the “Track Ride”. From here, enter a route name into the "route name" input field, and then click “Start Tracking”. Here the mobile device can be stored away until you have come to the end of your route. And to Stop tracking simply press “Stop Tracking”.
+
+
+Viewing route
+To view a route, you have previous taken, simply open the app and from any screen press the “Previous Routes” button. You should see a list of the routes you have recorded, to then see a plotted route press the desired route. To return to the “previous routes” page simply press the button again.

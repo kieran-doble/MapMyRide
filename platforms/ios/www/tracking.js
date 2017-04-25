@@ -1,33 +1,35 @@
+// Author UP693500 Web Technologies
+// Improves on Logan Mortimer 2012 article https://tutsplus.com/authors/logan-mortimer
+
 var route_id = '';      // Name/ID of the route
 var watch_id = null;    // ID of the geolocation
 var tracking_data = []; // Array containing GPS position objects
 
 $("#startTracking_start").live('click', function(){
 
-    // Start tracking the User
+    // Enable geolocation plugin and begin watching position
     watch_id = navigator.geolocation.watchPosition(
 
-        // Success
+        // sucessful watch
         function(position){
             tracking_data.push(position);
         },
 
-        // Error
+        // Error log if watchPosition fails
         function(error){
             console.log(error);
         },
 
-        // Settings
+        // Set the watch delay (3 seconds) enables highest accuracy option
         { frequency: 3000, enableHighAccuracy: true });
 
-    // Tidy up the UI
     route_id = $("#route_id").val();
 
     $("#route_id").hide();
-
+    // Displays "Tracking route x"
     $("#startTracking_status").html("Tracking route: <strong>" + route_id + "</strong>");
 });
-
+//Needed to store GeoPosition as a JSON array
 function cloneAsObject(obj) {
     if (obj === null || !(obj instanceof Object)) {
         return obj;
@@ -48,21 +50,16 @@ $("#startTracking_stop").live('click', function(){
   // Save the tracking data
   window.localStorage.setItem(route_id, JSON.stringify(cloneAsObject(tracking_data)));
 
-  // Reset watch_id and tracking_data
-  var watch_id = null;
-  //var tracking_data = null;
-
-  // Tidy up the UI
-  $("#route_id").val("").show();
-
+  //displays stopped tracking and updates the view.
   $("#startTracking_status").html("Stopped tracking route: <strong>" + route_id + "</strong>");
 
 });
 
+// Clear local storage for testing
 $("#home_clearstorage_button").live('click', function(){
     window.localStorage.clear();
 });
-
+ // Dummy data to show theory
 $("#home_seedgps_button").live('click', function(){
     window.localStorage.setItem('Sample block','[{"timestamp":1335700800000,"coords":{"heading":null,"altitude":null,"longitude":-1.806859,"accuracy":0,"latitude":50.731435,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335800805000,"coords":{"heading":null,"altitude":null,"longitude":-1.808243,"accuracy":0,"latitude":50.732209,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700808000,"coords":{"heading":null,"altitude":null,"longitude":-1.809574,"accuracy":0,"latitude":50.731157,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335900810000,"coords":{"heading":null,"altitude":null,"longitude":-1.807535,"accuracy":0,"latitude":50.730043,"speed":null,"altitudeAccuracy":null}},{"timestamp":1336000812000,"coords":{"heading":null,"altitude":null,"longitude":-1.806194,"accuracy":0,"latitude":50.731062,"speed":null,"altitudeAccuracy":null}},{"timestamp":1335700815000,"coords":{"heading":null,"altitude":null,"longitude":-1.806859,"accuracy":0,"latitude":50.731435,"speed":null,"altitudeAccuracy":null}}]');
 
@@ -177,7 +174,7 @@ for(i=0; i<data.length; i++){
 // Plot the GPS entries as a line on the Google Map
 var trackPath = new google.maps.Polyline({
   path: trackCoords,
-  strokeColor: "#FF0000",
+  strokeColor: "#0000FF",
   strokeOpacity: 1.0,
   strokeWeight: 2
 });

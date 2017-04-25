@@ -1,12 +1,12 @@
 {
-  "name": "phonegap-template-hello-world",
-  "version": "4.0.3",
-  "description": "> A Hello World template built with PhoneGap",
+  "name": "Map My Ride",
+  "version": "1.0.1",
+  "description": "A GPS tracking application aimed at motorycleists.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/phonegap/phonegap-app-hello-world.git"
+    "url": "https://github.com/kierandoble/MapMyRide"
   },
-  "author": "PhoneGap Team",
+  "author": "UP693500",
   "license": "Apache-2.0",
   "keywords": [
     "ecosystem:phonegap",

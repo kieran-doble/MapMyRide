@@ -2,10 +2,10 @@
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>MapMyRide</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        GPS tracking application for motorcyclists for route tracking and sharing.
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="UP693500@myport.ac.uk">
+        UP693500
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
@@ -117,7 +117,7 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <preference name="AutoHideSplashScreen" value="true" />
-    <preference name="SplashScreenDelay" value="50000" />
+    <preference name="SplashScreenDelay" value="5000" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
 </widget>
